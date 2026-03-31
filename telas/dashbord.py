@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from tkinter import ttk
+from utils.utils import convert_date_for_label
 
 """| Cor | Código | Uso |"""
 
@@ -38,6 +39,10 @@ class Dashboard(ctk.CTkFrame):
             font=("Arial", 24, "bold")
         )
         self.titulo.pack(pady=5, anchor='w')
+        self.label_data = ctk.CTkLabel(self.frame_titulo,
+                                       text=convert_date_for_label(),
+                                       text_color=COR_CINZA_ESCURO,font=("Arial", 16, "bold"))
+        self.label_data.pack()
         #frame para os cards
         self.frame_cards = ctk.CTkFrame(self, fg_color=COR_CINZA_CLARO)
         self.frame_cards.pack(pady=20, padx=20,fill='x')
@@ -140,6 +145,8 @@ class Dashboard(ctk.CTkFrame):
                                             "Tipo",
                                             "Status"),
                                             show="headings",)
+        self.scroll_bar_tabela = ttk.Scrollbar(self.frame_tabela, )
+        self.scroll_bar_tabela.pack(fill="y", side='right')
         self.tabela.pack(fill="x", padx=20, pady=10)
         #adicionando na tabela
         self.tabela.heading("Paciente", text="Paciente", anchor='w')

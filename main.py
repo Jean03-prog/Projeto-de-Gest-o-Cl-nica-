@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from telas.dashbord import Dashboard
+from telas.tela_novo_atendimento import NovoAtendimento
 
 """| Cor | Código | Uso |"""
 
@@ -55,8 +56,11 @@ class App(ctk.CTk):
         self.conteudo_frame.grid(row=0, column=1, sticky="nsew")
 
         #carregar dashboard
-        self.dashboard = Dashboard(self.conteudo_frame)
-        self.dashboard.pack(fill="both", expand=True)
+        # self.dashboard = Dashboard(self.conteudo_frame)
+        # self.dashboard.pack(fill="both", expand=True)
+        #carregar novo atendimento
+        self.novo_atendimento = NovoAtendimento(self.conteudo_frame)
+        self.novo_atendimento.pack(fill="both", expand=True)
 
 
 app = App()
