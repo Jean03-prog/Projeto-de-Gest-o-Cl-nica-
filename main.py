@@ -52,7 +52,7 @@ class App(ctk.CTk):
         btn_novo_atendimento.pack(pady=15, padx=10, fill='x')
 
         #frame para as telas
-        self.conteudo_frame = ctk.CTkScrollableFrame(self, fg_color=COR_CINZA_CLARO)
+        self.conteudo_frame = ctk.CTkFrame(self, fg_color=COR_CINZA_CLARO)
         self.conteudo_frame.grid(row=0, column=1, sticky="nsew")
 
         #carregar dashboard
