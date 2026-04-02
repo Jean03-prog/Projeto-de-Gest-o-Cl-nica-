@@ -45,83 +45,19 @@ class Dashboard(ctk.CTkFrame):
         self.label_data.pack()
         #frame para os cards
         self.frame_cards = ctk.CTkFrame(self, fg_color=COR_CINZA_CLARO)
-        self.frame_cards.pack(pady=20, padx=20,fill='x')
+        self.frame_cards.pack(pady=20, padx=20,fill='both', expand=True)
         self.frame_cards.grid_columnconfigure(0, weight=2)
         self.frame_cards.grid_columnconfigure(1, weight=2)
-        self.frame_cards.grid_columnconfigure(2, weight=2)
+        self.frame_cards.grid_rowconfigure(0,weight=1)
         #frame para o card total pacientes
-        self.frame_total_pacientes = ctk.CTkFrame(self.frame_cards,
-                                                  fg_color=COR_BRANCO,
-                                                  corner_radius=20,
-                                                  border_width=1.5)
-        self.frame_total_pacientes.grid(row=0, column=0, pady=20, padx=20, sticky='ew')
-        #labels total pacientes
-        self.label_emoji_pacientes = ctk.CTkLabel(self.frame_total_pacientes,
-                                                  text="😷",
-                                                  font=("Arial", 50))
-        self.label_emoji_pacientes.grid(row=0, column=0,pady=15,padx=15,sticky='w')
-
-        self.label_total_pacientes = ctk.CTkLabel(self.frame_total_pacientes,
-                                                  text="Total de Pacientes",
-                                                  text_color=COR_CINZA_ESCURO,
-                                                  font=("Arial", 16, "bold"))
-        self.label_total_pacientes.grid(row=1, column=0,pady=15,padx=15, sticky='w')
-
-        self.label_numero_pacientes = ctk.CTkLabel(self.frame_total_pacientes,
-                                                   text="0.0",
-                                                   text_color=COR_CINZA_ESCURO,
-                                                  font=("Arial", 16, "bold"))
-        self.label_numero_pacientes.grid(row=2, column=0,pady=15,padx=15, sticky='w')
-
+        self.frame_total_pacientes, self.label_numero_pacientes = self.criar_card_dashboard("😷","Total de Pacientes")
+        self.frame_total_pacientes.grid(row=0, column=0, pady=20, padx=20, sticky="ew")
         #frame para atendimentos registrado
-        self.frame_atendimentos = ctk.CTkFrame(self.frame_cards,
-                                               fg_color=COR_BRANCO,
-                                                  corner_radius=20,
-                                                  border_width=1.5)
-        self.frame_atendimentos.grid(row=0, column=1, pady=20, padx=20, sticky='ew')
-        
-        #label atendimentos registrados
-        self.label_emoji_atendimentos = ctk.CTkLabel(self.frame_atendimentos,
-                                                     text='📋',
-                                                  font=("Arial", 50))
-        self.label_emoji_atendimentos.grid(row=0, column=0,pady=15,padx=15,sticky='w')
-
-        self.label_atendimentos_registrados = ctk.CTkLabel(self.frame_atendimentos,
-                                                           text="Atendimentos Registrados",
-                                                           text_color=COR_CINZA_ESCURO,
-                                                           font=("Arial", 16, "bold"))
-        self.label_atendimentos_registrados.grid(row=1, column=0,pady=15,padx=15, sticky='w')
-
-        self.label_numero_atendimentos = ctk.CTkLabel(self.frame_atendimentos,
-                                                      text="0.0",
-                                                      text_color=COR_CINZA_ESCURO,
-                                                      font=("Arial", 16, "bold"))
-        self.label_numero_atendimentos.grid(row=2, column=0,pady=15,padx=15, sticky='w')
-
+        self.frame_atendimentos, self.numero_atendimentos = self.criar_card_dashboard('📋',"Atendimentos Registrados")
+        self.frame_atendimentos.grid(row=0, column=1, pady=20, padx=20, sticky="ew")
         #frame atendimentos hoje
-        self.frame_atendimentos_hoje = ctk.CTkFrame(self.frame_cards,
-                                                    fg_color=COR_BRANCO,
-                                                  corner_radius=20,
-                                                  border_width=1.5)
-        self.frame_atendimentos_hoje.grid(row=0, column=2, pady=20, padx=20, sticky='ew')
-        #labels atendimentos hoje
-        self.label_emoji_atendimentos_hoje = ctk.CTkLabel(self.frame_atendimentos_hoje,
-                                                          text="✅",
-                                                  font=("Arial", 45))
-        self.label_emoji_atendimentos_hoje.grid(row=0, column=0,pady=15,padx=15,sticky='w')
-
-        self.label_atendimentos_hoje = ctk.CTkLabel(self.frame_atendimentos_hoje,
-                                                    text="Atendimentos Hoje",
-                                                    text_color=COR_CINZA_ESCURO,
-                                                    font=("Arial", 16, "bold"))
-        self.label_atendimentos_hoje.grid(row=1, column=0,pady=15,padx=15, sticky='w')
-
-        self.label_numero_atendimentos_hoje = ctk.CTkLabel(self.frame_atendimentos_hoje,
-                                                           text="0.0",
-                                                           text_color=COR_CINZA_ESCURO,
-                                                           font=("Arial", 16, "bold"))
-        self.label_numero_atendimentos_hoje.grid(row=2, column=0,pady=15,padx=15, sticky='w')
-
+        self.frame_atendimentos_hoje, self.numero_atendimentos_hoje = self.criar_card_dashboard("✅","Atendimentos Hoje")
+        self.frame_atendimentos_hoje.grid(row=0, column=2, pady=20, padx=20, sticky="ew")
         #frame tabela
         self.frame_tabela = ctk.CTkFrame(self, fg_color=COR_BRANCO,
                                          corner_radius=20)
@@ -161,4 +97,21 @@ class Dashboard(ctk.CTkFrame):
         #dados de teste
         self.tabela.insert("","end",values=("João Silva", "09:00", "Consulta", "Realizado"))
 
-        self.tabela.insert("","end",values=("Maria Souza", "10:30", "Retorno", "Acompanhamento"))
+        self.tabela.insert("","end",values=("Maria Souza", "10:30", "Retorno", "Acompanhamento"))#164
+    def criar_card_dashboard(self, emoji, titulo):
+        card = ctk.CTkFrame(self.frame_cards, fg_color=COR_BRANCO, corner_radius=20, border_width=1.5)
+        card.grid_columnconfigure(0, weight=1)
+
+        label = ctk.CTkLabel(card,text=emoji,
+                                  text_color=COR_CINZA_ESCURO,
+                                  font=("Arial",50))
+        label.grid(row=0, column=0,pady=15,padx=15,sticky='w')
+        label_titulo = ctk.CTkLabel(card,text=titulo,
+                                    text_color=COR_CINZA_ESCURO,
+                                    font=("Arial", 16, "bold"))
+        label_titulo.grid(row=1, column=0,pady=15,padx=15, sticky='w')
+        label_numero = ctk.CTkLabel(card,text="0.0",
+                                    text_color=COR_CINZA_ESCURO,
+                                    font=("Arial", 16, "bold"))
+        label_numero.grid(row=2,column=0,pady=15,padx=15, sticky='w')
+        return card, label_numero
