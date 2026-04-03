@@ -81,8 +81,6 @@ class Dashboard(ctk.CTkFrame):
                                             "Tipo",
                                             "Status"),
                                             show="headings",)
-        self.scroll_bar_tabela = ttk.Scrollbar(self.frame_tabela, )
-        self.scroll_bar_tabela.pack(fill="y", side='right')
         self.tabela.pack(fill="x", padx=20, pady=10)
         #adicionando na tabela
         self.tabela.heading("Paciente", text="Paciente", anchor='w')

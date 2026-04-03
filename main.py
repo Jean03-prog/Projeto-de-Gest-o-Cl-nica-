@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from telas.dashbord import Dashboard
+from telas.tela_atendimentos import Atendimento
 from telas.tela_novo_atendimento import NovoAtendimento
 from telas.tela_novo_paciente import NovoPaciente
 
@@ -14,7 +15,7 @@ class App(ctk.CTk):
         super().__init__()
 
         self.title("Clínica Saúde")
-        self.geometry("1200x800")
+        self.geometry("1820x800")
         self.configure(fg_color = COR_CINZA_CLARO)
 
         self.grid_columnconfigure(1, weight=1)
@@ -26,25 +27,19 @@ class App(ctk.CTk):
         self.label_clinica = ctk.CTkLabel(self.menu_frame, text="🧬 Clinica Saude+", font=("Arial", 24, "bold"), text_color=COR_BRANCO)
         self.label_clinica.pack(pady=20, padx=10)
 
-        btn_dashboard = ctk.CTkButton(self.menu_frame, text= "Dashboard", anchor='w', font=("Arial", 16, "bold"), command=self.mostrar_dashboard)
-        btn_dashboard.pack(pady=15, padx=10, fill='x')
-
-        btn_paciente = ctk.CTkButton(self.menu_frame, text="Pacientes", anchor='w', font=("Arial", 16, "bold"))
-        btn_paciente.pack(pady=15,padx=10, fill='x')
-
-        btn_atendimentos = ctk.CTkButton(self.menu_frame, text="Atendimentos", anchor='w', font=("Arial", 16, "bold"))
-        btn_atendimentos.pack(pady=15, padx=10, fill='x')
-
-        btn_novo_paciente = ctk.CTkButton(self.menu_frame, text="Novo Paciente", anchor='w', font=("Arial", 16, "bold"), command=self.mostrar_novo_paciente)
-        btn_novo_paciente.pack(pady=15, padx=10, fill='x')
-
-        btn_novo_atendimento = ctk.CTkButton(self.menu_frame, text="Novo Atendimento", anchor='w', font=("Arial", 16, "bold"), command=self.mostrar_novo_atendimento)
-        btn_novo_atendimento.pack(pady=15, padx=10, fill='x')
-
+        self.criar_botao("Dashboard", self.mostrar_dashboard)
+        self.criar_botao("Pacientes", None)
+        self.criar_botao("Atendimentos", self.mostrar_atendimento)
+        self.criar_botao("Novo Paciente", self.mostrar_novo_paciente)
+        self.criar_botao("Novo Atendimento", self.mostrar_novo_atendimento)
         #frame para as telas
         self.conteudo_frame = ctk.CTkFrame(self, fg_color=COR_CINZA_CLARO)
         self.conteudo_frame.grid(row=0, column=1, sticky="nsew")
         self.mostrar_dashboard()
+    def criar_botao(self, texto, comando):
+        botao = ctk.CTkButton(self.menu_frame, text=texto, anchor="w",font=("Arial", 16, "bold"), command=comando)
+        botao.pack(pady=15, padx=10, fill="x")
+        return botao
     def limpar_tela(self):
         for widget in self.conteudo_frame.winfo_children():
             widget.destroy()
@@ -52,6 +47,10 @@ class App(ctk.CTk):
         self.limpar_tela()
         self.dashboard = Dashboard(self.conteudo_frame)
         self.dashboard.pack(fill="both",expand=True)
+    def mostrar_atendimento(self):
+        self.limpar_tela()
+        self.atendimento = Atendimento(self.conteudo_frame)
+        self.atendimento.pack(fill="both", expand=True)
     def mostrar_novo_atendimento(self):
         self.limpar_tela()
         self.novo_atendimento = NovoAtendimento(self.conteudo_frame)
