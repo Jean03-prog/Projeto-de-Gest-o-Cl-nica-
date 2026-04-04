@@ -1,8 +1,10 @@
 import customtkinter as ctk
 from telas.dashbord import Dashboard
+from telas.tela_pacientes import Paciente
 from telas.tela_atendimentos import Atendimento
 from telas.tela_novo_atendimento import NovoAtendimento
 from telas.tela_novo_paciente import NovoPaciente
+from telas.tela_detalhes_paciente import TelaDetalhes
 
 COR_ROXO = "#7c3aed" #Sidebar, botões principais, ícones
 COR_AZUL = "#3b82f6" #Cards, destaques, status
@@ -28,7 +30,7 @@ class App(ctk.CTk):
         self.label_clinica.pack(pady=20, padx=10)
 
         self.criar_botao("Dashboard", self.mostrar_dashboard)
-        self.criar_botao("Pacientes", None)
+        self.criar_botao("Pacientes", self.mostrar_paciente)
         self.criar_botao("Atendimentos", self.mostrar_atendimento)
         self.criar_botao("Novo Paciente", self.mostrar_novo_paciente)
         self.criar_botao("Novo Atendimento", self.mostrar_novo_atendimento)
@@ -47,9 +49,13 @@ class App(ctk.CTk):
         self.limpar_tela()
         self.dashboard = Dashboard(self.conteudo_frame)
         self.dashboard.pack(fill="both",expand=True)
+    def mostrar_paciente(self):
+        self.limpar_tela()
+        self.paciente = Paciente(self.conteudo_frame, self.mostrar_novo_paciente, self.abrir_detalhes)
+        self.paciente.pack(fill="both", expand=True)
     def mostrar_atendimento(self):
         self.limpar_tela()
-        self.atendimento = Atendimento(self.conteudo_frame)
+        self.atendimento = Atendimento(self.conteudo_frame,self.mostrar_novo_atendimento)
         self.atendimento.pack(fill="both", expand=True)
     def mostrar_novo_atendimento(self):
         self.limpar_tela()
@@ -59,6 +65,10 @@ class App(ctk.CTk):
         self.limpar_tela()
         self.novo_paciente = NovoPaciente(self.conteudo_frame)
         self.novo_paciente.pack(fill="both",expand=True)
+    def abrir_detalhes(self, paciente):
+        self.limpar_tela()  
+        tela = TelaDetalhes(self.conteudo_frame, paciente, self.mostrar_paciente, self.mostrar_novo_atendimento)
+        tela.pack(fill="both", expand=True)
 
 app = App()
 app.mainloop()
