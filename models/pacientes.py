@@ -1,4 +1,4 @@
-class Pacientes:
+class Paciente:
     def __init__(self, id, nome, data_nascimento, telefone, email):
         self.id = id
         self.nome = nome

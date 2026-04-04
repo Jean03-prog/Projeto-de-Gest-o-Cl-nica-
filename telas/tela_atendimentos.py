@@ -1,7 +1,6 @@
 import customtkinter as ctk
 from tkcalendar import DateEntry
 from tkinter import ttk
-
 COR_ROXO = "#7c3aed" #Sidebar, botões principais, ícones
 COR_AZUL = "#3b82f6" #Cards, destaques, status
 COR_BRANCO ="#ffffff" #Fundo dos cards, superfícies
@@ -9,8 +8,9 @@ COR_CINZA = "#808080" #Fundo da página
 COR_CINZA_ESCURO = "#111827" #Textos e títulos
 
 class Atendimento(ctk.CTkFrame):
-    def __init__(self, master):
+    def __init__(self, master, abrir_novo_atendimento):
         super().__init__(master, fg_color=COR_BRANCO)
+        self.abrir_novo_atendimento = abrir_novo_atendimento
         #frame header
         self.frame_header = ctk.CTkFrame(self,fg_color=COR_BRANCO,border_width=1)
         self.frame_header.pack(fill='x', pady=20, padx=20)
@@ -25,7 +25,7 @@ class Atendimento(ctk.CTkFrame):
                                                text="Novo Atendimento➕",
                                                text_color=COR_BRANCO,
                                                corner_radius=10,
-                                               fg_color=COR_ROXO)
+                                               fg_color=COR_ROXO, command=self.abrir_novo_atendimento)
         self.botao_atendimento.pack(side='right',pady=5,padx=20)
         #frame para header filtros
         self.frame_header_filtros = ctk.CTkFrame(self,fg_color=COR_BRANCO)
@@ -134,13 +134,12 @@ class Atendimento(ctk.CTkFrame):
         self.frame_tabela.pack(fill='both', expand=True, pady=20,padx=20)
         #treeview
         self.treeview_filtro = ttk.Treeview(self.frame_tabela,
-                                            columns=("ID", "PACIENTE", "TIPO","DATA/HORA", "PROFISSIONAL", "STATUS", "AÇÕES"),
+                                            columns=("ID", "PACIENTE", "TIPO","DATA/HORA","STATUS", "AÇÕES"),
                                             show="headings")
         self.treeview_filtro.pack(fill='both', expand=True, pady=20, padx=20)
         self.treeview_filtro.heading("ID", text="ID", anchor="w")
         self.treeview_filtro.heading("PACIENTE", text="PACIENTE")
         self.treeview_filtro.heading("TIPO", text="TIPO")
         self.treeview_filtro.heading("DATA/HORA", text="DATA/HORA")
-        self.treeview_filtro.heading("PROFISSIONAL", text="PROFISSIONAL")
         self.treeview_filtro.heading("STATUS", text="STATUS")
         self.treeview_filtro.heading("AÇÕES", text="AÇÕES")

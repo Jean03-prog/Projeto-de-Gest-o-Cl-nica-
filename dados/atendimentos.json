@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "paciente_id": "Maria Lucia",
+        "data": "03/04/2026",
+        "tipo": "Exame",
+        "observacoes": "Exame doido",
+        "status": "Em Acompanhamento"
+    },
+    {
+        "id": 2,
+        "paciente_id": 1,
+        "data": "03/04/2026",
+        "tipo": "Consulta",
+        "observacoes": "dasdasd",
+        "status": "Realizado"
+    },
+    {
+        "id": 3,
+        "paciente_id": 1,
+        "data": "03/04/2026",
+        "tipo": "Consulta",
+        "observacoes": "Vai vim colar aqui",
+        "status": "Em Acompanhamento"
+    }
+]

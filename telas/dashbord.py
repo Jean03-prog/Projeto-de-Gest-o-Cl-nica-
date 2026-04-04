@@ -1,6 +1,8 @@
 import customtkinter as ctk
 from tkinter import ttk
-from utils.utils import convert_date_for_label
+from utils.json_manager import convert_date_for_label
+from utils.json_manager import carregar_json
+from datetime import datetime
 
 """| Cor | Código | Uso |"""
 
@@ -70,32 +72,32 @@ class Dashboard(ctk.CTkFrame):
         self.label_titulo_tabela.pack(pady=30, padx=30, anchor="w")
         #estilo treeview
         style = ttk.Style()
-        style.configure("Treeview",rowheight=30, font=("Arial", 13))
+        style.configure("Treeview",rowheight=35,font=("Arial", 13),background=COR_BRANCO,fieldbackground=COR_BRANCO)
 
         style.configure("Treeview.Heading",
                         font=("Arial", 13, "bold"))
         #treeviw tabela
         self.tabela = ttk.Treeview(self.frame_tabela,
                                    columns=("Paciente",
-                                            "Horário",
+                                            "Data",
                                             "Tipo",
                                             "Status"),
                                             show="headings",)
         self.tabela.pack(fill="x", padx=20, pady=10)
         #adicionando na tabela
         self.tabela.heading("Paciente", text="Paciente", anchor='w')
-        self.tabela.heading("Horário", text="Horário", anchor='w')
+        self.tabela.heading("Data", text="Data", anchor='w')
         self.tabela.heading("Tipo", text="Tipo", anchor='w')
         self.tabela.heading("Status", text="Status", anchor='w')
         #largura das colunas
         self.tabela.column("Paciente", width=220, anchor='w')
-        self.tabela.column("Horário", width=100, anchor='w')
+        self.tabela.column("Data", width=100, anchor='w')
         self.tabela.column("Tipo", width=150, anchor='w')
         self.tabela.column("Status", width=130, anchor="w")
-        #dados de teste
-        self.tabela.insert("","end",values=("João Silva", "09:00", "Consulta", "Realizado"))
-
-        self.tabela.insert("","end",values=("Maria Souza", "10:30", "Retorno", "Acompanhamento"))#164
+        self.tabela.tag_configure("realizado",background=FUNDO_REALIZADO,foreground=TEXTO_REALIZADO)
+        self.tabela.tag_configure("acompanhamento",background=FUNDO_ACOMPANHAMENTO,foreground=TEXTO_ACOMPANHAMENTO)
+        self.atualizar_dashboard()
+        self.carregar_atendimentos_hoje()
     def criar_card_dashboard(self, emoji, titulo):
         card = ctk.CTkFrame(self.frame_cards, fg_color=COR_BRANCO, corner_radius=20, border_width=1.5)
         card.grid_columnconfigure(0, weight=1)
@@ -113,3 +115,51 @@ class Dashboard(ctk.CTkFrame):
                                     font=("Arial", 16, "bold"))
         label_numero.grid(row=2,column=0,pady=15,padx=15, sticky='w')
         return card, label_numero
+    def carregar_atendimentos_hoje(self):
+
+        for i in self.tabela.get_children():
+            self.tabela.delete(i)
+
+        atendimentos = carregar_json("dados/atendimentos.json")
+        pacientes = carregar_json("dados/pacientes.json")
+
+        pacientes_dict = {p["id"]: p["nome"] for p in pacientes}
+
+        for atendimento in atendimentos:
+
+            nome_paciente = pacientes_dict.get(
+                atendimento["paciente_id"], "Desconhecido"
+            )
+
+            status = atendimento["status"]
+
+            tag = ""
+            if status == "Realizado":
+                tag = "realizado"
+            elif status == "Em Acompanhamento":
+                tag = "acompanhamento"
+
+            self.tabela.insert(
+                "",
+                "end",
+                values=(
+                    nome_paciente,
+                    atendimento["data"],
+                    atendimento["tipo"],
+                    atendimento["status"]
+                ),
+                tags=(tag,)
+            )
+    def atualizar_dashboard(self):
+        pacientes = carregar_json("dados/pacientes.json")
+        atendimentos = carregar_json("dados/atendimentos.json")
+        total_pacientes = len(pacientes)
+        total_atendimentos = len(atendimentos)
+        hoje = datetime.now().strftime("%d/%m/%Y")
+        atendimentos_hoje = 0
+        for atendimento in atendimentos:
+            if atendimento["data"] == hoje:
+                atendimentos_hoje += 1
+        self.label_numero_pacientes.configure(text=str(total_pacientes))
+        self.numero_atendimentos.configure(text=str(total_atendimentos))
+        self.numero_atendimentos_hoje.configure(text=str(atendimentos_hoje))

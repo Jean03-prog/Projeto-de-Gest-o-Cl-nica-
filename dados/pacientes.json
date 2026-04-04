@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "nome": "Jean CLaudio",
+        "data_nascimento": "03/04/2026",
+        "telefone": "(85) 99838-3838",
+        "email": "maria@gmail.com"
+    },
+    {
+        "id": 2,
+        "nome": "Maria da Silva",
+        "data_nascimento": "03/04/2026",
+        "telefone": "(98) 30304-0495",
+        "email": "maria@gmail.com"
+    },
+    {
+        "id": 3,
+        "nome": "Davi Silva",
+        "data_nascimento": "03/04/2026",
+        "telefone": "(88) 93939-3944",
+        "email": "davi@gmail.com"
+    }
+]

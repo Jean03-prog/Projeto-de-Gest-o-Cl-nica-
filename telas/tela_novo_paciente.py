@@ -1,5 +1,9 @@
 import customtkinter as ctk
 from tkcalendar import DateEntry
+from tkinter import messagebox as mg
+from models.pacientes import Paciente
+from utils.json_manager import adicionar_paciente
+import re
 
 COR_ROXO = "#7c3aed" #Sidebar, botões principais, ícones
 COR_AZUL = "#3b82f6" #Cards, destaques, status
@@ -68,6 +72,7 @@ class NovoPaciente(ctk.CTkFrame):
                                                 fg_color=COR_BRANCO,
                                                 text_color=COR_CINZA)
         self.entry_telefone.pack(fill="x")
+        self.entry_telefone.bind("<KeyRelease>", self.mascara_telefone)
         #card email
         self.card_email = self.criar_card("✉️E-mail","#2CCE6A")
         #entry email
@@ -84,6 +89,7 @@ class NovoPaciente(ctk.CTkFrame):
                                                    fg_color=COR_BRANCO,
                                                    text_color=COR_CINZA)
         self.entry_numero_documento.pack(fill="x")
+        self.entry_numero_documento.bind("<KeyRelease>", self.mascara_cpf)
         #card para botao de salvar paciente
         self.card_salvar = ctk.CTkFrame(self.frame_principal,
                                         fg_color=COR_BRANCO)
@@ -91,7 +97,7 @@ class NovoPaciente(ctk.CTkFrame):
         #botao salvar atendimento
         self.botao_salvar_paciente = ctk.CTkButton(self.card_salvar,text="💾Salvar Paciente",
                                           text_color=COR_BRANCO,
-                                          fg_color=COR_ROXO)
+                                          fg_color=COR_ROXO, command=self.salvar_paciente)
         self.botao_salvar_paciente.pack(fill='x', pady=10, padx=20)
     def criar_card(self, texto, cor):
         card = ctk.CTkFrame(self.frame_principal, fg_color=COR_BRANCO)
@@ -102,3 +108,64 @@ class NovoPaciente(ctk.CTkFrame):
                                   font=("Arial",12,"bold"))
         label.pack(anchor="w")
         return card
+    def email_valido(self, email):
+        import re
+        padrao = r"^[\w\.-]+@[\w\.-]+\.\w+$"
+        return re.match(padrao, email)
+    def salvar_paciente(self):
+
+        nome = self.entry_nome_completo.get()
+        data_nascimento = self.dataentry_data_nascimento.get()
+        telefone = self.entry_telefone.get()
+        email = self.entry_email.get()
+        if not nome:
+            mg.showerror("Erro", "Digite o nome do paciente")
+            return
+        if not telefone:
+            mg.showerror("Erro", "Digite o telefone")
+            return
+        if email and not self.email_valido(email):
+            mg.showerror("Erro", "Email inválido")
+            return
+        paciente = Paciente(
+            id=0,
+            nome=nome,
+            data_nascimento=data_nascimento,
+            telefone=telefone,
+            email=email)
+        adicionar_paciente(paciente)
+        self.limpar_campos()
+        mg.showinfo("Sucesso", "Paciente cadastrado com sucesso!")
+    def limpar_campos(self):
+        self.entry_nome_completo.delete(0, "end")
+        self.entry_telefone.delete(0, "end")
+        self.entry_email.delete(0, "end")
+        self.entry_numero_documento.delete(0, "end")
+    def mascara_telefone(self, event):
+        texto = self.entry_telefone.get()
+        numeros = "".join(filter(str.isdigit, texto))
+        if len(numeros) > 11:
+            numeros = numeros[:11]
+        if len(numeros) <= 2:
+            texto_formatado = f"({numeros}"
+        elif len(numeros) <= 7:
+            texto_formatado = f"({numeros[:2]}) {numeros[2:]}"
+        else:
+            texto_formatado = f"({numeros[:2]}) {numeros[2:7]}-{numeros[7:]}"
+        self.entry_telefone.delete(0, "end")
+        self.entry_telefone.insert(0, texto_formatado)
+    def mascara_cpf(self,event):
+        text = self.entry_numero_documento.get()
+        numeros = "".join(filter(str.isdigit, text))
+        if len(numeros)>11:
+            numeros = numeros[:11]
+        if len(numeros)<=3:
+            texto_formatado = f"{numeros}"
+        elif len(numeros)<=6:
+            texto_formatado = f"{numeros[:3]}.{numeros[3:]}"
+        elif len(numeros)<=9:
+            texto_formatado = f"{numeros[:3]}.{numeros[3:6]}.{numeros[6:]}"
+        else:
+            texto_formatado = f"{numeros[:3]}.{numeros[3:6]}.{numeros[6:9]}-{numeros[9:]}"
+        self.entry_numero_documento.delete(0, "end")
+        self.entry_numero_documento.insert(0, texto_formatado)
