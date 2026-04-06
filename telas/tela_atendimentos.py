@@ -1,6 +1,8 @@
 import customtkinter as ctk
 from tkcalendar import DateEntry
 from tkinter import ttk
+from tkinter import messagebox as mg
+from utils.json_manager import salvar_json
 from utils.json_manager import listar_atendimentos, listar_pacientes
 COR_ROXO = "#7c3aed" #Sidebar, botões principais, ícones
 COR_AZUL = "#3b82f6" #Cards, destaques, status

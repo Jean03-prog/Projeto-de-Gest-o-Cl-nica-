@@ -1,7 +1,6 @@
 import customtkinter as ctk
-from utils.json_manager import listar_atendimentos
-from datetime import datetime 
-
+from utils.json_manager import listar_atendimentos, salvar_json, listar_pacientes
+from tkinter import messagebox as mg
 
 COR_ROXO = "#7c3aed"
 COR_BRANCO ="#ffffff"
@@ -59,29 +58,41 @@ class HistoricoPacientes(ctk.CTkFrame):
         self.item = ctk.CTkFrame(self.frame_lista, fg_color="#f9fafb", corner_radius=10, border_width=1)
         self.item.pack(fill="x", pady=5)
 
-        # tipo atendimento
+        #tipo atendimento
         self.label_tipo = ctk.CTkLabel(
             self.item,
             text=atendimento["tipo"],
             font=("Arial",14,"bold"),
-            text_color=COR_CINZA_ESCURO
-        )
+            text_color=COR_CINZA_ESCURO)
         self.label_tipo.pack(anchor="w", padx=10, pady=(10,0))
 
-        # data
+        #data
         self.label_data = ctk.CTkLabel(
             self.item,
             text=atendimento["data"],
-            text_color=COR_CINZA
-        )
+            text_color=COR_CINZA)
         self.label_data.pack(anchor="w", padx=10)
 
-        # status
+        #status
         self.label_status = ctk.CTkLabel(
             self.item,
-            text=f"Status: {atendimento['status']}",
-            text_color=COR_CINZA
-        )
+            text=f"Status: {atendimento["status"]}",
+            text_color=COR_CINZA)
         self.label_status.pack(anchor="w", padx=10, pady=(0,10))
+        #button excluir
+        self.button_excluir = ctk.CTkButton(self.item,text="Excluir",width=60,fg_color="#ef4444",
+                                            command=lambda:self.excluir_atendimento(atendimento["id"]))
+        self.button_excluir.pack(padx=10, pady=10, anchor="e")
         self.item.bind("<Enter>", lambda e: self.item.configure(fg_color="#f3f4f6"))
         self.item.bind("<Leave>", lambda e: self.item.configure(fg_color="#f9fafb"))
+    def excluir_atendimento(self, atendimento_id):
+        confirm = mg.askyesno(
+            "Excluir paciente",
+            f"Deseja realmente excluir esse Atendimento?")
+        mg.showinfo("Sucesso", "Atendimento excluído com sucesso!")
+        if not confirm:
+            return
+        atendimentos = listar_atendimentos()
+        atendimentos = [p for p in atendimentos if p["id"] != atendimento_id]
+        salvar_json("dados/atendimentos.json", atendimentos)
+        self.carregar_historico()

@@ -32,7 +32,7 @@ class TelaDetalhes(ctk.CTkFrame):
         self.btn_novo_atendimento = ctk.CTkButton(
             self.frame_acoes,
             text="➕ Novo Atendimento",
-            fg_color=COR_ROXO,command=lambda: self.novo_atendimento(self.paciente))
+            fg_color=COR_ROXO,command=self.novo_atendimento)
         self.btn_novo_atendimento.pack(side="right")
         # titulo
         self.titulo = ctk.CTkLabel(
@@ -66,7 +66,7 @@ class TelaDetalhes(ctk.CTkFrame):
         item.pack(fill="x", pady=5)
         item.bind("<Enter>", lambda e: item.configure(fg_color="#f3f4f6"))
         item.bind("<Leave>", lambda e: item.configure(fg_color="#f9fafb"))
-        # avatar
+        #avatar
         avatar = ctk.CTkLabel(
             item,
             text=nome[0],
@@ -78,7 +78,7 @@ class TelaDetalhes(ctk.CTkFrame):
             font=("Arial",16,"bold"))
         avatar.pack(side="left", padx=10, pady=10)
 
-        # texto
+        #texto
         frame_texto = ctk.CTkFrame(item, fg_color="transparent")
         frame_texto.pack(side="left", fill="x", expand=True)
 
@@ -95,7 +95,7 @@ class TelaDetalhes(ctk.CTkFrame):
             text_color=COR_CINZA)
         desc.pack(anchor="w")
 
-        # seta direita
+        #seta direita
         seta = ctk.CTkLabel(
             item,
             text="›",
