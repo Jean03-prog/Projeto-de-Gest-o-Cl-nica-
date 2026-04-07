@@ -134,6 +134,7 @@ class NovoPaciente(ctk.CTkFrame):
             return
         paciente = Paciente(
             id=0,
+            usuario=self.master.master.usuario["usuario"],
             nome=nome,
             data_nascimento=data_nascimento,
             telefone=telefone,

@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from tkinter import messagebox as mg
 from telas.dashbord import Dashboard
 from telas.tela_pacientes import Paciente
 from telas.tela_atendimentos import Atendimento
@@ -6,6 +7,7 @@ from telas.tela_novo_atendimento import NovoAtendimento
 from telas.tela_novo_paciente import NovoPaciente
 from telas.tela_detalhes_paciente import TelaDetalhes
 from telas.tela_historico_pacientes import HistoricoPacientes
+from telas.tela_login import Login
 
 COR_ROXO = "#7c3aed" #Sidebar, botões principais, ícones
 COR_AZUL = "#3b82f6" #Cards, destaques, status
@@ -14,9 +16,9 @@ COR_CINZA_CLARO = "#f9fafb" #Fundo da página
 COR_CINZA_ESCURO = "#111827" #Textos e títulos
 
 class App(ctk.CTk):
-    def __init__(self):
+    def __init__(self,usuario=None):
         super().__init__()
-
+        self.usuario = usuario
         self.title("Clínica Saúde")
         self.geometry("1700x800")
         self.configure(fg_color = COR_CINZA_CLARO)
@@ -35,10 +37,36 @@ class App(ctk.CTk):
         self.criar_botao("Atendimentos", self.mostrar_atendimento)
         self.criar_botao("Novo Paciente", self.mostrar_novo_paciente)
         self.criar_botao("Novo Atendimento", self.mostrar_novo_atendimento)
+        #frame usuario
+        self.frame_usuario = ctk.CTkFrame(self.menu_frame,
+            fg_color="#6d28d9",
+            corner_radius=12)
+        self.frame_usuario.pack(side="bottom", fill="x", padx=15, pady=20)
+
+        #icone com nome
+        self.label_usuario = ctk.CTkLabel(self.frame_usuario,
+            text=f"👤 {self.usuario['usuario']}" if self.usuario else "👤 Usuário",
+            font=("Arial", 14, "bold"),
+            text_color="white")
+        self.label_usuario.pack(anchor="w", padx=10, pady=(10,0))
+
+        #texto pequeno
+        self.label_tipo = ctk.CTkLabel(self.frame_usuario,
+            text="Usuário logado",
+            font=("Arial", 12, "bold"),
+            text_color="#e5e7eb")
+        self.label_tipo.pack(anchor="w", padx=10, pady=(0,10))
+        self.btn_logout = ctk.CTkButton(self.frame_usuario,
+                                        text="Sair",
+                                        fg_color="#ef4444",
+                                        command=self.logout)
+        self.btn_logout.pack(fill="x", padx=10, pady=(5,10))
+
         #frame para as telas
         self.conteudo_frame = ctk.CTkFrame(self, fg_color=COR_CINZA_CLARO)
         self.conteudo_frame.grid(row=0, column=1, sticky="nsew")
-        self.mostrar_dashboard()
+        self.withdraw()
+        self.mostrar_login()
     def criar_botao(self, texto, comando):
         botao = ctk.CTkButton(self.menu_frame, text=texto, anchor="w",font=("Arial", 16, "bold"), command=comando)
         botao.pack(pady=15, padx=10, fill="x")
@@ -74,3 +102,18 @@ class App(ctk.CTk):
         self.limpar_tela()
         self.historico = HistoricoPacientes(self.conteudo_frame,paciente,self.mostrar_atendimento)
         self.historico.pack(fill="both", expand=True)
+    def mostrar_login(self):
+        for w in self.winfo_children():
+            w.destroy()
+        self.login = Login(self, self.abrir_sistema)
+        self.login.pack(fill="both", expand=True)
+    def abrir_sistema(self, usuario):
+        self.usuario = usuario
+        self.limpar_tela()
+        self.mostrar_dashboard()
+    def logout(self):
+        comfirm = mg.askyesno("Logout", "Deseja sair do sistema?")
+        if not comfirm:
+            return
+        self.withdraw()
+        self.mostrar_login()

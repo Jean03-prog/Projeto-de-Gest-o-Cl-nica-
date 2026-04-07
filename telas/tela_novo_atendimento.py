@@ -44,6 +44,8 @@ class NovoAtendimento(ctk.CTkFrame):
         #frame principal
         self.frame_principal = ctk.CTkFrame(self.frame_centro, fg_color=COR_BRANCO,
                                             corner_radius=20,
+                                            border_width=1,
+                                            border_color="#e5e7eb",
                                             width=400,
                                             height=500)
         self.frame_principal.pack(expand=True, padx=40, pady=20)
@@ -141,6 +143,7 @@ class NovoAtendimento(ctk.CTkFrame):
         paciente_id = self.pacientes_dict.get(nome_paciente)
         atendimento = Atendimento(
             id=0,
+            usuario=self.master.master.usuario["usuario"],
             paciente_id=paciente_id,
             data=data,
             tipo=tipo,

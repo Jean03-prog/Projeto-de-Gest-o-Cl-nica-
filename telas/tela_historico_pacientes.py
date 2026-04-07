@@ -50,6 +50,8 @@ class HistoricoPacientes(ctk.CTkFrame):
 
     def carregar_historico(self):
         self.atendimentos = listar_atendimentos()
+        for widget in self.frame_lista.winfo_children():
+            widget.destroy()
         for atendimento in self.atendimentos:
             if int(atendimento["paciente_id"]) == int(self.paciente["id"]):
                 self.criar_item(atendimento)
@@ -71,14 +73,19 @@ class HistoricoPacientes(ctk.CTkFrame):
             self.item,
             text=atendimento["data"],
             text_color=COR_CINZA)
-        self.label_data.pack(anchor="w", padx=10)
+        self.label_data.pack(anchor="w", padx=10, pady=(0,10))
 
         #status
         self.label_status = ctk.CTkLabel(
             self.item,
-            text=f"Status: {atendimento["status"]}",
+            text=f"Status: {atendimento['status']}",
             text_color=COR_CINZA)
         self.label_status.pack(anchor="w", padx=10, pady=(0,10))
+        #observações
+        self.label_observacoes = ctk.CTkLabel(self.item,
+                                              text=f"Observações: {atendimento['observacoes']}",
+                                              text_color=COR_CINZA)
+        self.label_observacoes.pack(anchor="w", padx=10, pady=(0,10))
         #button excluir
         self.button_excluir = ctk.CTkButton(self.item,text="Excluir",width=60,fg_color="#ef4444",
                                             command=lambda:self.excluir_atendimento(atendimento["id"]))

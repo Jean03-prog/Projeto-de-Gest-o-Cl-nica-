@@ -20,7 +20,9 @@ TEXTO_REALIZADO = "#166534" #verde escuro texto
 FUNDO_ACOMPANHAMENTO = "#dbeafe" #azul claro fundo
 TEXTO_ACOMPANHAMENTO = "#1e40af" #azul escuro texto
 class Dashboard(ctk.CTkFrame):
-    def __init__(self, master):
+    def __init__(self, master, usuario, voltar_login):
+        self.usuario = usuario
+        self.voltar_login = voltar_login
         super().__init__(master, fg_color='transparent')
         self.frame_titulo = ctk.CTkFrame(self, fg_color=COR_CINZA_CLARO)
         self.frame_titulo.pack(padx=20,pady=25,anchor='w')
