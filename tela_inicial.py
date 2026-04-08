@@ -1,12 +1,12 @@
 import customtkinter as ctk
 from tkinter import messagebox as mg
-from telas.dashbord import Dashboard
-from telas.tela_pacientes import Paciente
-from telas.tela_atendimentos import Atendimento
-from telas.tela_novo_atendimento import NovoAtendimento
-from telas.tela_novo_paciente import NovoPaciente
-from telas.tela_detalhes_paciente import TelaDetalhes
-from telas.tela_historico_pacientes import HistoricoPacientes
+from views.dashbord import Dashboard
+from views.tela_pacientes import Paciente
+from views.tela_atendimentos import Atendimento
+from views.tela_novo_atendimento import NovoAtendimento
+from views.tela_novo_paciente import NovoPaciente
+from views.tela_detalhes_paciente import TelaDetalhes
+from views.tela_historico_pacientes import HistoricoPacientes
 
 COR_ROXO = "#7c3aed" #Sidebar, botões principais, ícones
 COR_AZUL = "#3b82f6" #Cards, destaques, status
@@ -17,8 +17,8 @@ COR_CINZA_ESCURO = "#111827" #Textos e títulos
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("Clínica Saúde")
-        self.geometry("1700x800")
+        self.title("Sistema de Clínica Médica")
+        self.geometry("1200x800")
         self.configure(fg_color = COR_CINZA_CLARO)
 
         self.grid_columnconfigure(1, weight=1)
@@ -35,6 +35,7 @@ class App(ctk.CTk):
         self.criar_botao("Atendimentos", self.mostrar_atendimento)
         self.criar_botao("Novo Paciente", self.mostrar_novo_paciente)
         self.criar_botao("Novo Atendimento", self.mostrar_novo_atendimento)
+        self.criar_botao("Sair", self.sair_sistema)
 
         #frame para as telas
         self.conteudo_frame = ctk.CTkFrame(self, fg_color=COR_CINZA_CLARO)
@@ -75,3 +76,8 @@ class App(ctk.CTk):
         self.limpar_tela()
         self.historico = HistoricoPacientes(self.conteudo_frame,paciente,self.mostrar_atendimento)
         self.historico.pack(fill="both", expand=True)
+    def sair_sistema(self):
+        comfirm = mg.askyesno("Sair", "Tem certeza que deseja sair?")
+        if not comfirm:
+            return
+        self.quit()

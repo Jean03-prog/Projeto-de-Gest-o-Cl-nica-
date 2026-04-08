@@ -1,249 +1,242 @@
-[{
-    "id": 1,
-    "paciente_id": 1,
-    "data": "01/04/2026",
-    "tipo": "Consulta",
-    "observacoes": "Primeira consulta",
-    "status": "Realizado"
-},
-{
-    "id": 2,
-    "paciente_id": 1,
-    "data": "03/04/2026",
-    "tipo": "Retorno",
-    "observacoes": "Melhora",
-    "status": "Realizado"
-},
-{
-    "id": 3,
-    "paciente_id": 1,
-    "data": "05/04/2026",
-    "tipo": "Retorno",
-    "observacoes": "Alta prevista",
-    "status": "Agendado"
-},
-
-{
-    "id": 4,
-    "paciente_id": 2,
-    "data": "01/04/2026",
-    "tipo": "Consulta",
-    "observacoes": "Dor de cabeça",
-    "status": "Realizado"
-},
-{
-    "id": 5,
-    "paciente_id": 2,
-    "data": "02/04/2026",
-    "tipo": "Exame",
-    "observacoes": "Solicitado exame",
-    "status": "Realizado"
-},
-{
-    "id": 6,
-    "paciente_id": 2,
-    "data": "06/04/2026",
-    "tipo": "Retorno",
-    "observacoes": "Aguardando resultado",
-    "status": "Agendado"
-},
-
-{
-    "id": 7,
-    "paciente_id": 3,
-    "data": "01/04/2026",
-    "tipo": "Consulta",
-    "observacoes": "Rotina",
-    "status": "Realizado"
-},
-{
-    "id": 8,
-    "paciente_id": 3,
-    "data": "04/04/2026",
-    "tipo": "Retorno",
-    "observacoes": "Tudo normal",
-    "status": "Realizado"
-},
-{
-    "id": 9,
-    "paciente_id": 3,
-    "data": "07/04/2026",
-    "tipo": "Retorno",
-    "observacoes": "Acompanhamento",
-    "status": "Agendado"
-},
-
-{
-    "id": 10,
-    "paciente_id": 4,
-    "data": "02/04/2026",
-    "tipo": "Consulta",
-    "observacoes": "Dor lombar",
-    "status": "Realizado"
-},
-{
-    "id": 11,
-    "paciente_id": 4,
-    "data": "03/04/2026",
-    "tipo": "Fisioterapia",
-    "observacoes": "Sessão 1",
-    "status": "Realizado"
-},
-{
-    "id": 12,
-    "paciente_id": 4,
-    "data": "06/04/2026",
-    "tipo": "Fisioterapia",
-    "observacoes": "Sessão 2",
-    "status": "Agendado"
-},
-
-{
-    "id": 13,
-    "paciente_id": 5,
-    "data": "01/04/2026",
-    "tipo": "Consulta",
-    "observacoes": "Check-up",
-    "status": "Realizado"
-},
-{
-    "id": 14,
-    "paciente_id": 5,
-    "data": "02/04/2026",
-    "tipo": "Exame",
-    "observacoes": "Coleta sangue",
-    "status": "Realizado"
-},
-{
-    "id": 15,
-    "paciente_id": 5,
-    "data": "05/04/2026",
-    "tipo": "Retorno",
-    "observacoes": "Resultado ok",
-    "status": "Agendado"
-},
-
-{
-    "id": 16,
-    "paciente_id": 6,
-    "data": "01/04/2026",
-    "tipo": "Consulta",
-    "observacoes": "Febre",
-    "status": "Realizado"
-},
-{
-    "id": 17,
-    "paciente_id": 6,
-    "data": "03/04/2026",
-    "tipo": "Retorno",
-    "observacoes": "Melhora parcial",
-    "status": "Realizado"
-},
-{
-    "id": 18,
-    "paciente_id": 6,
-    "data": "06/04/2026",
-    "tipo": "Retorno",
-    "observacoes": "Quase curado",
-    "status": "Agendado"
-},
-
-{
-    "id": 19,
-    "paciente_id": 7,
-    "data": "02/04/2026",
-    "tipo": "Consulta",
-    "observacoes": "Ansiedade",
-    "status": "Realizado"
-},
-{
-    "id": 20,
-    "paciente_id": 7,
-    "data": "04/04/2026",
-    "tipo": "Psicoterapia",
-    "observacoes": "Sessão 1",
-    "status": "Realizado"
-},
-{
-    "id": 21,
-    "paciente_id": 7,
-    "data": "07/04/2026",
-    "tipo": "Psicoterapia",
-    "observacoes": "Sessão 2",
-    "status": "Agendado"
-},
-
-{
-    "id": 22,
-    "paciente_id": 8,
-    "data": "01/04/2026",
-    "tipo": "Consulta",
-    "observacoes": "Dor no joelho",
-    "status": "Realizado"
-},
-{
-    "id": 23,
-    "paciente_id": 8,
-    "data": "03/04/2026",
-    "tipo": "Exame",
-    "observacoes": "Raio-X",
-    "status": "Realizado"
-},
-{
-    "id": 24,
-    "paciente_id": 8,
-    "data": "06/04/2026",
-    "tipo": "Retorno",
-    "observacoes": "Em análise",
-    "status": "Agendado"
-},
-
-{
-    "id": 25,
-    "paciente_id": 9,
-    "data": "02/04/2026",
-    "tipo": "Consulta",
-    "observacoes": "Rotina",
-    "status": "Realizado"
-},
-{
-    "id": 26,
-    "paciente_id": 9,
-    "data": "05/04/2026",
-    "tipo": "Retorno",
-    "observacoes": "Tudo bem",
-    "status": "Realizado"
-},
-{
-    "id": 27,
-    "paciente_id": 9,
-    "data": "07/04/2026",
-    "tipo": "Retorno",
-    "observacoes": "Acompanhamento",
-    "status": "Agendado"
-},
-
-{
-    "id": 28,
-    "paciente_id": 10,
-    "data": "01/04/2026",
-    "tipo": "Consulta",
-    "observacoes": "Dor abdominal",
-    "status": "Realizado"
-},
-{
-    "id": 29,
-    "paciente_id": 10,
-    "data": "03/04/2026",
-    "tipo": "Exame",
-    "observacoes": "Ultrassom",
-    "status": "Realizado"
-},
-{
-    "id": 30,
-    "paciente_id": 10,
-    "data": "06/04/2026",
-    "tipo": "Retorno",
-    "observacoes": "Aguardando laudo",
-    "status": "Agendado"
-}]
+[
+    {
+        "id": 1,
+        "paciente_id": 1,
+        "data": "01/04/2026",
+        "tipo": "Consulta",
+        "observacoes": "Primeira consulta",
+        "status": "Realizado"
+    },
+    {
+        "id": 2,
+        "paciente_id": 1,
+        "data": "03/04/2026",
+        "tipo": "Retorno",
+        "observacoes": "Melhora",
+        "status": "Realizado"
+    },
+    {
+        "id": 3,
+        "paciente_id": 1,
+        "data": "05/04/2026",
+        "tipo": "Retorno",
+        "observacoes": "Alta prevista",
+        "status": "Agendado"
+    },
+    {
+        "id": 4,
+        "paciente_id": 2,
+        "data": "01/04/2026",
+        "tipo": "Consulta",
+        "observacoes": "Dor de cabeça",
+        "status": "Realizado"
+    },
+    {
+        "id": 5,
+        "paciente_id": 2,
+        "data": "02/04/2026",
+        "tipo": "Exame",
+        "observacoes": "Solicitado exame",
+        "status": "Realizado"
+    },
+    {
+        "id": 6,
+        "paciente_id": 2,
+        "data": "06/04/2026",
+        "tipo": "Retorno",
+        "observacoes": "Aguardando resultado",
+        "status": "Agendado"
+    },
+    {
+        "id": 7,
+        "paciente_id": 3,
+        "data": "01/04/2026",
+        "tipo": "Consulta",
+        "observacoes": "Rotina",
+        "status": "Realizado"
+    },
+    {
+        "id": 8,
+        "paciente_id": 3,
+        "data": "04/04/2026",
+        "tipo": "Retorno",
+        "observacoes": "Tudo normal",
+        "status": "Realizado"
+    },
+    {
+        "id": 9,
+        "paciente_id": 3,
+        "data": "07/04/2026",
+        "tipo": "Retorno",
+        "observacoes": "Acompanhamento",
+        "status": "Agendado"
+    },
+    {
+        "id": 10,
+        "paciente_id": 4,
+        "data": "02/04/2026",
+        "tipo": "Consulta",
+        "observacoes": "Dor lombar",
+        "status": "Realizado"
+    },
+    {
+        "id": 11,
+        "paciente_id": 4,
+        "data": "03/04/2026",
+        "tipo": "Fisioterapia",
+        "observacoes": "Sessão 1",
+        "status": "Realizado"
+    },
+    {
+        "id": 12,
+        "paciente_id": 4,
+        "data": "06/04/2026",
+        "tipo": "Fisioterapia",
+        "observacoes": "Sessão 2",
+        "status": "Agendado"
+    },
+    {
+        "id": 13,
+        "paciente_id": 5,
+        "data": "01/04/2026",
+        "tipo": "Consulta",
+        "observacoes": "Check-up",
+        "status": "Realizado"
+    },
+    {
+        "id": 14,
+        "paciente_id": 5,
+        "data": "02/04/2026",
+        "tipo": "Exame",
+        "observacoes": "Coleta sangue",
+        "status": "Realizado"
+    },
+    {
+        "id": 15,
+        "paciente_id": 5,
+        "data": "05/04/2026",
+        "tipo": "Retorno",
+        "observacoes": "Resultado ok",
+        "status": "Agendado"
+    },
+    {
+        "id": 16,
+        "paciente_id": 6,
+        "data": "01/04/2026",
+        "tipo": "Consulta",
+        "observacoes": "Febre",
+        "status": "Realizado"
+    },
+    {
+        "id": 17,
+        "paciente_id": 6,
+        "data": "03/04/2026",
+        "tipo": "Retorno",
+        "observacoes": "Melhora parcial",
+        "status": "Realizado"
+    },
+    {
+        "id": 18,
+        "paciente_id": 6,
+        "data": "06/04/2026",
+        "tipo": "Retorno",
+        "observacoes": "Quase curado",
+        "status": "Agendado"
+    },
+    {
+        "id": 19,
+        "paciente_id": 7,
+        "data": "02/04/2026",
+        "tipo": "Consulta",
+        "observacoes": "Ansiedade",
+        "status": "Realizado"
+    },
+    {
+        "id": 20,
+        "paciente_id": 7,
+        "data": "04/04/2026",
+        "tipo": "Psicoterapia",
+        "observacoes": "Sessão 1",
+        "status": "Realizado"
+    },
+    {
+        "id": 21,
+        "paciente_id": 7,
+        "data": "07/04/2026",
+        "tipo": "Psicoterapia",
+        "observacoes": "Sessão 2",
+        "status": "Agendado"
+    },
+    {
+        "id": 22,
+        "paciente_id": 8,
+        "data": "01/04/2026",
+        "tipo": "Consulta",
+        "observacoes": "Dor no joelho",
+        "status": "Realizado"
+    },
+    {
+        "id": 23,
+        "paciente_id": 8,
+        "data": "03/04/2026",
+        "tipo": "Exame",
+        "observacoes": "Raio-X",
+        "status": "Realizado"
+    },
+    {
+        "id": 24,
+        "paciente_id": 8,
+        "data": "06/04/2026",
+        "tipo": "Retorno",
+        "observacoes": "Em análise",
+        "status": "Agendado"
+    },
+    {
+        "id": 25,
+        "paciente_id": 9,
+        "data": "02/04/2026",
+        "tipo": "Consulta",
+        "observacoes": "Rotina",
+        "status": "Realizado"
+    },
+    {
+        "id": 26,
+        "paciente_id": 9,
+        "data": "05/04/2026",
+        "tipo": "Retorno",
+        "observacoes": "Tudo bem",
+        "status": "Realizado"
+    },
+    {
+        "id": 27,
+        "paciente_id": 9,
+        "data": "07/04/2026",
+        "tipo": "Retorno",
+        "observacoes": "Acompanhamento",
+        "status": "Agendado"
+    },
+    {
+        "id": 28,
+        "paciente_id": 10,
+        "data": "01/04/2026",
+        "tipo": "Consulta",
+        "observacoes": "Dor abdominal",
+        "status": "Realizado"
+    },
+    {
+        "id": 29,
+        "paciente_id": 10,
+        "data": "03/04/2026",
+        "tipo": "Exame",
+        "observacoes": "Ultrassom",
+        "status": "Realizado"
+    },
+    {
+        "id": 30,
+        "paciente_id": 10,
+        "data": "06/04/2026",
+        "tipo": "Retorno",
+        "observacoes": "Aguardando laudo",
+        "status": "Agendado"
+    }
+]
